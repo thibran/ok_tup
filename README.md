@@ -3,7 +3,7 @@
 Create to convert a type which implements `ok_tup::Optionaler` trait
 into a single Option guarded tuple using a macro.
 
-Version: 0.1.0
+Version: 0.1.1
 
 
 ## Installation
@@ -12,7 +12,7 @@ Add to `Cargo.toml`:
 ```toml
 [dependencies.ok_tup]
 git = "https://github.com/thibran/ok_tup.git"
-tag = "v0.1.0"
+tag = "v0.1.1"
 ```
 
 

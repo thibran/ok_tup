@@ -66,8 +66,8 @@
 #[macro_export]
 macro_rules! ok_tup {
     ($a:expr) => {
-        if let (Some(a),)
-        = ($crate::Optionaler::okay($a),) {
+        if let Some(a)
+        = $crate::Optionaler::okay($a) {
             Some((a,))
         } else { None }
     };
@@ -200,10 +200,10 @@ macro_rules! ok_tup {
         } else { None }
     };
     // TODO wirte a generic if-let general matcher
-    ($($x:expr),*) => {
+    ($($x:expr),+) => {
         if $($crate::Optionaler::okay($x).is_some()) &&* {
             Some((
-                $($crate::Optionaler::okay($x).unwrap()),*
+                $($crate::Optionaler::okay($x).unwrap()),+
                 ,))
         } else { None }
     };
