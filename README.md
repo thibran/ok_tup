@@ -15,12 +15,6 @@ git = "https://github.com/thibran/ok_tup.git"
 tag = "v0.1.0"
 ```
 
-In your code, add:
-```rust
-#[macro_use]
-extern crate ok_tup;
-```
-
 
 ## Examples
 

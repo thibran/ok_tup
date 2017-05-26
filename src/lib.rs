@@ -215,6 +215,20 @@ pub trait Optionaler<T> {
     fn okay(self) -> Option<T>;
 }
 
+impl<T> Optionaler<T> for Option<T> {
+    #[inline]
+    fn okay(self) -> Option<T> {
+        self
+    }
+}
+
+impl<'a, T: Clone> Optionaler<T> for &'a Option<T> {
+    #[inline]
+    fn okay(self) -> Option<T> {
+        self.clone()
+    }
+}
+
 impl<T, E> Optionaler<T> for Result<T, E> {
     #[inline]
     fn okay(self) -> Option<T> {
@@ -222,10 +236,13 @@ impl<T, E> Optionaler<T> for Result<T, E> {
     }
 }
 
-impl<T> Optionaler<T> for Option<T> {
+impl<'a, T: Clone, E> Optionaler<T> for &'a Result<T, E> {
     #[inline]
     fn okay(self) -> Option<T> {
-        self
+        match *self {
+            Ok(ref x) => Some(x.clone()),
+            Err(_) => None,
+        }
     }
 }
 
@@ -260,5 +277,15 @@ mod tests {
         let a: Option<(_, _, _, _, _, _, _, _, _, _, String)>
             = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5), Some(6),
                 Some(7), Some(8), Some(9), Some(10), Some("a".to_owned()));
+        
+        let s: &str = "hello";
+        ok_tup!(Some(s));
+        let s: Option<i32> = Some(1);
+        ok_tup!(&s);
+
+        let s: &str = "hello";
+        ok_tup!(Ok::<_, i32>(s));
+        let s: Result<_, i32> = Ok(1);
+        ok_tup!(&s);
     }
 }
