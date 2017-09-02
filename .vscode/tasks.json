@@ -1,0 +1,36 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "test",
+            "type": "shell",
+            "command": "cargo",
+            "args": [ "test", "test_ok_tup" ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": ["$rustc"],
+            "presentation": {
+                "focus": true,
+                "panel": "new"
+            }
+        },
+        {
+            "taskName": "build",
+            "type": "shell",
+            "command": "cargo",
+            "args": [ "build", "--release" ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$rustc"],
+            "presentation": {
+                "focus": true,
+                "panel": "new"
+            }
+        }
+    ]
+}
