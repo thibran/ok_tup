@@ -65,148 +65,159 @@
 /// ```
 #[macro_export]
 macro_rules! ok_tup {
-    ($a:expr) => {
+    ($a:expr) => ({
+        use $crate::Optionaler;
         if let Some(a)
-        = $crate::Optionaler::okay($a) {
+        = Optionaler::okay($a) {
             Some((a,))
         } else { None }
-    };
-    ($a:expr, $b:expr) => {
+    });
+    ($a:expr, $b:expr) => ({
+        use $crate::Optionaler;
         if let (Some(a), Some(b))
         = (
-            $crate::Optionaler::okay($a),
-            $crate::Optionaler::okay($b),
+            Optionaler::okay($a),
+            Optionaler::okay($b),
         ) {
             Some((a, b))
         } else { None }
-    };
-    ($a:expr, $b:expr, $c:expr) => {
+    });
+    ($a:expr, $b:expr, $c:expr) => ({
+        use $crate::Optionaler;
         if let (Some(a), Some(b), Some(c))
         = (
-            $crate::Optionaler::okay($a),
-            $crate::Optionaler::okay($b),
-            $crate::Optionaler::okay($c),
+            Optionaler::okay($a),
+            Optionaler::okay($b),
+            Optionaler::okay($c),
         ) {
             Some((a, b, c))
         } else { None }
-    };
-    ($a:expr, $b:expr, $c:expr, $d:expr) => {
+    });
+    ($a:expr, $b:expr, $c:expr, $d:expr) => ({
+        use $crate::Optionaler;
         if let (Some(a), Some(b), Some(c), Some(d))
         = (
-            $crate::Optionaler::okay($a),
-            $crate::Optionaler::okay($b),
-            $crate::Optionaler::okay($c),
-            $crate::Optionaler::okay($d),
+            Optionaler::okay($a),
+            Optionaler::okay($b),
+            Optionaler::okay($c),
+            Optionaler::okay($d),
         ) {
             Some((a, b, c, d))
         } else { None }
-    };
-    ($a:expr, $b:expr, $c:expr, $d:expr, $e:expr) => {
+    });
+    ($a:expr, $b:expr, $c:expr, $d:expr, $e:expr) => ({
+        use $crate::Optionaler;
         if let (Some(a), Some(b), Some(c), Some(d), Some(e))
         = (
-            $crate::Optionaler::okay($a),
-            $crate::Optionaler::okay($b),
-            $crate::Optionaler::okay($c),
-            $crate::Optionaler::okay($d),
-            $crate::Optionaler::okay($e),
+            Optionaler::okay($a),
+            Optionaler::okay($b),
+            Optionaler::okay($c),
+            Optionaler::okay($d),
+            Optionaler::okay($e),
         ) {
             Some((a, b, c, d, e))
         } else { None }
-    };
-    ($a:expr, $b:expr, $c:expr, $d:expr, $e:expr, $f:expr) => {
+    });
+    ($a:expr, $b:expr, $c:expr, $d:expr, $e:expr, $f:expr) => ({
+        use $crate::Optionaler;
         if let (Some(a), Some(b), Some(c), Some(d), Some(e), Some(f))
         = (
-            $crate::Optionaler::okay($a),
-            $crate::Optionaler::okay($b),
-            $crate::Optionaler::okay($c),
-            $crate::Optionaler::okay($d),
-            $crate::Optionaler::okay($e),
-            $crate::Optionaler::okay($f),
+            Optionaler::okay($a),
+            Optionaler::okay($b),
+            Optionaler::okay($c),
+            Optionaler::okay($d),
+            Optionaler::okay($e),
+            Optionaler::okay($f),
         ) {
             Some((a, b, c, d, e, f))
         } else { None }
-    };
-    ($a:expr, $b:expr, $c:expr, $d:expr, $e:expr, $f:expr, $g:expr) => {
+    });
+    ($a:expr, $b:expr, $c:expr, $d:expr, $e:expr, $f:expr, $g:expr) => ({
+        use $crate::Optionaler;
         if let (Some(a), Some(b), Some(c), Some(d), Some(e), Some(f), Some(g))
         = (
-            $crate::Optionaler::okay($a),
-            $crate::Optionaler::okay($b),
-            $crate::Optionaler::okay($c),
-            $crate::Optionaler::okay($d),
-            $crate::Optionaler::okay($e),
-            $crate::Optionaler::okay($f),
-            $crate::Optionaler::okay($g),
+            Optionaler::okay($a),
+            Optionaler::okay($b),
+            Optionaler::okay($c),
+            Optionaler::okay($d),
+            Optionaler::okay($e),
+            Optionaler::okay($f),
+            Optionaler::okay($g),
         ) {
             Some((a, b, c, d, e, f, g))
         } else { None }
-    };
+    });
     (
         $a:expr, $b:expr, $c:expr, $d:expr, $e:expr, $f:expr, $g:expr, $h:expr
-    ) => {
+    ) => ({
+        use $crate::Optionaler;
         if let (Some(a), Some(b), Some(c), Some(d), Some(e), Some(f), Some(g),
             Some(h))
         = (
-            $crate::Optionaler::okay($a),
-            $crate::Optionaler::okay($b),
-            $crate::Optionaler::okay($c),
-            $crate::Optionaler::okay($d),
-            $crate::Optionaler::okay($e),
-            $crate::Optionaler::okay($f),
-            $crate::Optionaler::okay($g),
-            $crate::Optionaler::okay($h),
+            Optionaler::okay($a),
+            Optionaler::okay($b),
+            Optionaler::okay($c),
+            Optionaler::okay($d),
+            Optionaler::okay($e),
+            Optionaler::okay($f),
+            Optionaler::okay($g),
+            Optionaler::okay($h),
         ) {
             Some((a, b, c, d, e, f, g, h))
         } else { None }
-    };
+    });
     (
         $a:expr, $b:expr, $c:expr, $d:expr, $e:expr, $f:expr, $g:expr, $h:expr,
         $i:expr
-    ) => {
+    ) => ({
+        use $crate::Optionaler;
         if let (Some(a), Some(b), Some(c), Some(d), Some(e), Some(f), Some(g),
             Some(h), Some(i))
         = (
-            $crate::Optionaler::okay($a),
-            $crate::Optionaler::okay($b),
-            $crate::Optionaler::okay($c),
-            $crate::Optionaler::okay($d),
-            $crate::Optionaler::okay($e),
-            $crate::Optionaler::okay($f),
-            $crate::Optionaler::okay($g),
-            $crate::Optionaler::okay($h),
-            $crate::Optionaler::okay($i),
+            Optionaler::okay($a),
+            Optionaler::okay($b),
+            Optionaler::okay($c),
+            Optionaler::okay($d),
+            Optionaler::okay($e),
+            Optionaler::okay($f),
+            Optionaler::okay($g),
+            Optionaler::okay($h),
+            Optionaler::okay($i),
         ) {
             Some((a, b, c, d, e, f, g, h, i))
         } else { None }
-    };
+    });
     (
         $a:expr, $b:expr, $c:expr, $d:expr, $e:expr, $f:expr, $g:expr, $h:expr,
         $i:expr, $j:expr
-    ) => {
+    ) => ({
+        use $crate::Optionaler;
         if let (Some(a), Some(b), Some(c), Some(d), Some(e), Some(f), Some(g),
             Some(h), Some(i), Some(j))
         = (
-            $crate::Optionaler::okay($a),
-            $crate::Optionaler::okay($b),
-            $crate::Optionaler::okay($c),
-            $crate::Optionaler::okay($d),
-            $crate::Optionaler::okay($e),
-            $crate::Optionaler::okay($f),
-            $crate::Optionaler::okay($g),
-            $crate::Optionaler::okay($h),
-            $crate::Optionaler::okay($i),
-            $crate::Optionaler::okay($j),
+            Optionaler::okay($a),
+            Optionaler::okay($b),
+            Optionaler::okay($c),
+            Optionaler::okay($d),
+            Optionaler::okay($e),
+            Optionaler::okay($f),
+            Optionaler::okay($g),
+            Optionaler::okay($h),
+            Optionaler::okay($i),
+            Optionaler::okay($j),
         ) {
             Some((a, b, c, d, e, f, g, h, i, j))
         } else { None }
-    };
+    });
     // TODO wirte a generic if-let general matcher
-    ($($x:expr),+) => {
-        if $($crate::Optionaler::okay($x).is_some()) &&* {
+    ($($x:expr),+) => ({
+        use $crate::Optionaler;
+        if $(Optionaler::okay($x).is_some()) &&* {
             Some((
-                $($crate::Optionaler::okay($x).unwrap()),+
+                $(Optionaler::okay($x).unwrap()),+
                 ,))
         } else { None }
-    };
+    });
 }
 
 /// A type that can be converted into an Option.
