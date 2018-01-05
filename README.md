@@ -1,7 +1,7 @@
 # ok_tup
 
-Create to convert a type which implements `ok_tup::Optionaler` trait
-into a single Option guarded tuple using a macro.
+Create to convert a type which implements the `Optionaler` trait
+into a single Option guarded tuple, using a macro.
 
 Version: 0.1.1
 
@@ -18,7 +18,7 @@ tag = "v0.1.1"
 
 ## Examples
 
-From time to time we have to handle e.g. a lot of Optional
+From time to time we have to handle a lot of Optional
 values (containing different types), but procceding makes only sense when
 all variables contain a value, `ok_tup!` provides some syntax-sugar here.
 
@@ -26,16 +26,16 @@ all variables contain a value, `ok_tup!` provides some syntax-sugar here.
 #[macro_use]
 extern crate ok_tup;
 
-let a: Option<i32>    = Some(1);
-let b: Result<String> = Ok("jay".to_owned());
+let a = Some(1);
+let b = Ok("jay".to_owned());
 
 if let Some((number, name)) = ok_tup!(a, b) {
     println!("num: {}  name: {}", number, name);
 }
 ```
 
-By implementing the `ok_tup::Optionaler` trait,
-it is possible to use any type with the `ok_tup!` macro.
+By implementing the `Optionaler` trait,
+it is possible to use any type with `ok_tup!`.
 
 ```rust
 use ok_tup::Optionaler;
