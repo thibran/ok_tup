@@ -8,7 +8,7 @@ trait into a single Option guarded tuple, using a macro.
 
 From time to time we have to handle a lot of Optional
 values (containing different types), but procceding makes only sense when
-all variables contain a value, [ok_tup!](macro.ok_tup.html) provides some syntax-sugar here.
+all variables contain a value, [`ok_tup!`](macro.ok_tup.html) provides some syntax-sugar here.
 
 ```rust
 #[macro_use]
@@ -23,7 +23,7 @@ if let Some((number, name)) = ok_tup!(a, b) {
 ```
 
 By implementing the [Optionaler](trait.Optionaler.html) trait,
-it is possible to use any type with [ok_tup!](macro.ok_tup.html).
+it is possible to use any type with [`ok_tup!`](macro.ok_tup.html).
 
 ```rust
 use ok_tup::Optionaler;
