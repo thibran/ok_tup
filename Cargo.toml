@@ -1,8 +1,9 @@
 [package]
-name = "ok_tup"
-version = "0.1.1"
-authors = ["Thibaut Brandscheid <randaltor@web.de>"]
+name        = "ok_tup"
+version     = "0.2.0"
+authors     = ["Thibaut Brandscheid <randaltor@web.de>"]
 description = "Convert Option & Result values into a single Option guarded tuple"
-license = "BSD 2-Clause"
-readme = "README.md"
-categories = ["data-structures", "rust-patterns"]
+license     = "BSD 2-Clause"
+readme      = "README.md"
+categories  = ["data-structures", "rust-patterns"]
+edition     = "2018"

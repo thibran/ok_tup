@@ -11,11 +11,10 @@ values (containing different types), but procceding makes only sense when
 all variables contain a value, [`ok_tup!`](macro.ok_tup.html) provides some syntax-sugar here.
 
 ```rust
-#[macro_use]
-extern crate ok_tup;
+use ok_tup::ok_tup;
 
 let a = Some(1);
-let b = Ok("jay".to_owned());
+let b = Ok::<_, ()>("jay".to_owned());
 
 if let Some((number, name)) = ok_tup!(a, b) {
     println!("num: {}  name: {}", number, name);
@@ -26,7 +25,7 @@ By implementing the [Optionaler](trait.Optionaler.html) trait,
 it is possible to use any type with [`ok_tup!`](macro.ok_tup.html).
 
 ```rust
-use ok_tup::Optionaler;
+use ok_tup::{ok_tup, Optionaler};
 
 #[derive(Debug)]
 struct Foo {
@@ -39,7 +38,7 @@ impl Optionaler<Foo> for Foo {
     }
 }
 
-// The Foo struct can now be used with ok_tup! 
+// The Foo struct can now be used with ok_tup!
 let a = Some(1);
 let b = Some("jay".to_owned());
 let c = Foo{x: 42};
@@ -49,7 +48,6 @@ if let Some((num, name, foo)) = ok_tup!(a, b, c) {
 }
 ```
 */
-
 
 #[macro_export]
 macro_rules! ok_tup {
@@ -238,13 +236,12 @@ impl<T, E> Optionaler<T> for Result<T, E> {
 impl<'a, T: Clone, E> Optionaler<T> for &'a Result<T, E> {
     #[inline]
     fn okay(self) -> Option<T> {
-        match *self {
-            Ok(ref x) => Some(x.clone()),
+        match self {
+            Ok(x) => Some(x.clone()),
             Err(_) => None,
         }
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -255,28 +252,67 @@ mod tests {
         let a: Option<(_,)> = ok_tup!(Ok::<_, String>(1));
         let a: Option<(_, _)> = ok_tup!(Ok::<_, String>(1), Some(2));
         let a: Option<(_, _, _)> = ok_tup!(Some(1), Some(2), Some(3));
-        let a: Option<(i32, f32, u8, f64)>
-            = ok_tup!(Some(1_i32), Some(2_f32), Some(3_u8), Some(4_f64));
-        let a: Option<(_, _, _, _, _)>
-            = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5));
-        let a: Option<(_, _, _, _, _, _)>
-            = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5), Some(6));
-        let a: Option<(_, _, _, _, _, _, _)>
-            = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5), Some(6),
-                Some(7));
-        let a: Option<(_, _, _, _, _, _, _, _)>
-            = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5), Some(6),
-                Some(7), Some(8));
-        let a: Option<(_, _, _, _, _, _, _, _, _)>
-            = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5), Some(6),
-                Some(7), Some(8), Some(9));
-        let a: Option<(_, _, _, _, _, _, _, _, _, _)>
-            = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5), Some(6),
-                Some(7), Some(8), Some(9), Some(10));
-        let a: Option<(_, _, _, _, _, _, _, _, _, _, String)>
-            = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5), Some(6),
-                Some(7), Some(8), Some(9), Some(10), Some("a".to_owned()));
-        
+        let a: Option<(i32, f32, u8, f64)> =
+            ok_tup!(Some(1_i32), Some(2_f32), Some(3_u8), Some(4_f64));
+        let a: Option<(_, _, _, _, _)> = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5));
+        let a: Option<(_, _, _, _, _, _)> =
+            ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5), Some(6));
+        let a: Option<(_, _, _, _, _, _, _)> = ok_tup!(
+            Some(1),
+            Some(2),
+            Some(3),
+            Some(4),
+            Some(5),
+            Some(6),
+            Some(7)
+        );
+        let a: Option<(_, _, _, _, _, _, _, _)> = ok_tup!(
+            Some(1),
+            Some(2),
+            Some(3),
+            Some(4),
+            Some(5),
+            Some(6),
+            Some(7),
+            Some(8)
+        );
+        let a: Option<(_, _, _, _, _, _, _, _, _)> = ok_tup!(
+            Some(1),
+            Some(2),
+            Some(3),
+            Some(4),
+            Some(5),
+            Some(6),
+            Some(7),
+            Some(8),
+            Some(9)
+        );
+        let a: Option<(_, _, _, _, _, _, _, _, _, _)> = ok_tup!(
+            Some(1),
+            Some(2),
+            Some(3),
+            Some(4),
+            Some(5),
+            Some(6),
+            Some(7),
+            Some(8),
+            Some(9),
+            Some(10)
+        );
+        let a: Option<(_, _, _, _, _, _, _, _, _, _, String)> = ok_tup!(
+            Some(1),
+            Some(2),
+            Some(3),
+            Some(4),
+            Some(5),
+            Some(6),
+            Some(7),
+            Some(8),
+            Some(9),
+            Some(10),
+            Some("a".to_owned())
+        );
+
         let s: &str = "hello";
         ok_tup!(Some(s));
         let s: Option<i32> = Some(1);
