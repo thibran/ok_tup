@@ -23,11 +23,10 @@ values (containing different types), but procceding makes only sense when
 all variables contain a value, `ok_tup!` provides some syntax-sugar here.
 
 ```rust
-#[macro_use]
-extern crate ok_tup;
+use ok_tup::ok_tup;
 
 let a = Some(1);
-let b = Ok("jay".to_owned());
+let b = Ok::<_, ()>("jay".to_owned());
 
 if let Some((number, name)) = ok_tup!(a, b) {
     println!("num: {}  name: {}", number, name);
@@ -38,7 +37,7 @@ By implementing the `Optionaler` trait,
 it is possible to use any type with `ok_tup!`.
 
 ```rust
-use ok_tup::Optionaler;
+use ok_tup::{ok_tup, Optionaler};
 
 #[derive(Debug)]
 struct Foo {
@@ -51,7 +50,7 @@ impl Optionaler<Foo> for Foo {
     }
 }
 
-// The Foo struct can now be used with ok_tup! 
+// The Foo struct can now be used with ok_tup!
 let a = Some(1);
 let b = Some("jay".to_owned());
 let c = Foo{x: 42};
