@@ -254,7 +254,8 @@ mod tests {
         let a: Option<(_, _, _)> = ok_tup!(Some(1), Some(2), Some(3));
         let a: Option<(i32, f32, u8, f64)> =
             ok_tup!(Some(1_i32), Some(2_f32), Some(3_u8), Some(4_f64));
-        let a: Option<(_, _, _, _, _)> = ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5));
+        let a: Option<(_, _, _, _, _)> =
+            ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5));
         let a: Option<(_, _, _, _, _, _)> =
             ok_tup!(Some(1), Some(2), Some(3), Some(4), Some(5), Some(6));
         let a: Option<(_, _, _, _, _, _, _)> = ok_tup!(
