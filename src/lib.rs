@@ -243,6 +243,62 @@ impl<'a, T: Clone, E> Optionaler<T> for &'a Result<T, E> {
     }
 }
 
+impl Optionaler<std::ffi::OsString> for std::path::PathBuf {
+    #[inline]
+    fn okay(self) -> Option<std::ffi::OsString> {
+        Some(self.into())
+    }
+}
+
+impl<'a> Optionaler<std::ffi::OsString> for &'a std::path::Path {
+    #[inline]
+    fn okay(self) -> Option<std::ffi::OsString> {
+        Some(self.to_path_buf().into())
+    }
+}
+
+impl<'a> Optionaler<std::path::PathBuf> for &'a std::path::Path {
+    #[inline]
+    fn okay(self) -> Option<std::path::PathBuf> {
+        Some(self.into())
+    }
+}
+
+impl<'a> Optionaler<String> for &'a std::path::Path {
+    #[inline]
+    fn okay(self) -> Option<String> {
+        self.to_str().map(str::to_owned)
+    }
+}
+
+impl Optionaler<std::path::PathBuf> for std::ffi::OsString {
+    #[inline]
+    fn okay(self) -> Option<std::path::PathBuf> {
+        Some(self.into())
+    }
+}
+
+impl<'a> Optionaler<std::ffi::OsString> for &'a std::ffi::OsStr {
+    #[inline]
+    fn okay(self) -> Option<std::ffi::OsString> {
+        Some(self.to_os_string())
+    }
+}
+
+impl<'a> Optionaler<std::path::PathBuf> for &'a std::ffi::OsStr {
+    #[inline]
+    fn okay(self) -> Option<std::path::PathBuf> {
+        Some(self.into())
+    }
+}
+
+impl<'a> Optionaler<String> for &'a std::ffi::OsStr {
+    #[inline]
+    fn okay(self) -> Option<String> {
+        self.to_str().map(str::to_owned)
+    }
+}
+
 #[cfg(test)]
 mod tests {
 
@@ -323,5 +379,49 @@ mod tests {
         ok_tup!(Ok::<_, i32>(s));
         let s: Result<_, i32> = Ok(1);
         ok_tup!(&s);
+    }
+
+    #[test]
+    fn test_from_pathbuf() {
+        use std::ffi::OsStr;
+        use std::path::PathBuf;
+
+        let pb = PathBuf::from("hi");
+        let _foo: Option<(&OsStr,)> = ok_tup!(pb.file_stem());
+    }
+
+    #[test]
+    fn test_from_path() {
+        use std::ffi::OsString;
+        use std::path::Path;
+        use std::path::PathBuf;
+
+        let p = Path::new("hi");
+        let _foo: Option<(OsString,)> = ok_tup!(p);
+
+        let p = Path::new("hi");
+        let _foo: Option<(PathBuf,)> = ok_tup!(p);
+    }
+
+    #[test]
+    fn test_from_osstring() {
+        use std::ffi::OsString;
+        use std::path::PathBuf;
+
+        let s: OsString = "hi".into();
+        let _foo: Option<(PathBuf,)> = ok_tup!(s);
+    }
+
+    #[test]
+    fn test_from_osstr() {
+        use std::ffi::OsStr;
+        use std::ffi::OsString;
+        use std::path::PathBuf;
+
+        let p = OsStr::new("hi");
+        let _foo: Option<(OsString,)> = ok_tup!(p);
+
+        let p = OsStr::new("hi");
+        let _foo: Option<(PathBuf,)> = ok_tup!(p);
     }
 }

@@ -1,6 +1,6 @@
 [package]
 name        = "ok_tup"
-version     = "0.2.0"
+version     = "0.2.1"
 authors     = ["Thibaut Brandscheid <randaltor@web.de>"]
 description = "Convert Option & Result values into a single Option guarded tuple"
 license     = "BSD 2-Clause"
